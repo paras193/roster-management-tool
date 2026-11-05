@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Roster Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Smart Roster Manager</h1>
+    <div class="controls">
+      <label>Month <input type="month" id="month"></label>
+      <button id="btn-generate" title="Build a new roster from scratch (removes manual edits)">Generate (fresh)</button>
+      <button id="btn-replan" title="Build again but keep the cells you edited by hand">Re-plan (keep my edits)</button>
+      <label title="When leaves, rules or assignments change, re-plan affected months automatically"><input type="checkbox" id="auto"> Auto re-plan on changes</label>
+      <button id="btn-export">Export CSV</button>
+      <span id="state-badge" class="badge"></span>
+      <span id="issue-badge" class="badge"></span>
+    </div>
+  </header>
+
+  <nav id="tabs">
+    <button data-tab="roster" class="active">Roster</button>
+    <button data-tab="issues">Issues</button>
+    <button data-tab="compare">Compare plans</button>
+    <button data-tab="review">Review &amp; notifications</button>
+    <button data-tab="setup">Team &amp; Rules</button>
+    <button data-tab="leaves">Leaves &amp; Holidays</button>
+  </nav>
+
+  <main>
+    <section id="tab-roster">
+      <div class="controls">
+        <label>View
+          <select id="view">
+            <option value="company">Company</option>
+            <option value="pod">Pod</option>
+            <option value="brand">Brand</option>
+            <option value="process">Process</option>
+            <option value="employee">Employee</option>
+          </select>
+        </label>
+        <select id="target"></select>
+        <span class="legend">
+          <i class="c-W">W</i> working <i class="c-WO">WO</i> weekly off <i class="c-PH">PH</i> holiday
+          <i class="c-L">L</i> leave <i class="c-CO">CO</i> comp-off. Click a cell to change it.
+        </span>
+      </div>
+      <div id="roster-box"></div>
+    </section>
+
+    <section id="tab-issues" hidden><div id="issues-box"></div></section>
+
+    <section id="tab-compare" hidden><div id="compare-box"></div></section>
+
+    <section id="tab-review" hidden><div id="review-box"></div></section>
+
+    <section id="tab-setup" hidden>
+      <div class="controls" id="setup-nav"></div>
+      <div id="setup-box"></div>
+    </section>
+
+    <section id="tab-leaves" hidden>
+      <h2>Leaves and comp-offs</h2>
+      <div id="leaves-box"></div>
+      <h2>Public holidays</h2>
+      <div id="holidays-box"></div>
+    </section>
+  </main>
+
+  <div id="menu" hidden></div>
+  <div id="toast" hidden></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

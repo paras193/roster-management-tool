@@ -1,0 +1,69 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, Segoe UI, Arial, sans-serif; font-size: 14px; color: #1f2933; background: #f5f7fa; }
+header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; background: #1f3a5f; color: #fff; }
+header h1 { margin: 0; font-size: 18px; }
+header .controls { color: #fff; }
+nav { display: flex; gap: 4px; padding: 8px 20px 0; background: #e4e9f0; }
+nav button { border: 0; background: transparent; padding: 8px 14px; cursor: pointer; font-size: 14px; border-radius: 6px 6px 0 0; }
+nav button.active { background: #f5f7fa; font-weight: 600; }
+main { padding: 16px 20px 40px; }
+h2 { font-size: 16px; margin: 20px 0 8px; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
+button, select, input { font: inherit; }
+button { padding: 6px 12px; border: 1px solid #9aa5b1; background: #fff; border-radius: 4px; cursor: pointer; }
+button:hover { background: #eef2f7; }
+header button { border-color: #fff; }
+button.primary { background: #2f6fed; color: #fff; border-color: #2f6fed; }
+button.danger { color: #b42318; }
+input, select { padding: 5px 6px; border: 1px solid #9aa5b1; border-radius: 4px; background: #fff; }
+.badge { padding: 3px 10px; border-radius: 12px; font-size: 12px; background: #e4e9f0; color: #1f2933; }
+.badge.ok { background: #d1fadf; color: #05603a; }
+.badge.bad { background: #fee4e2; color: #b42318; }
+.badge.warn { background: #fef0c7; color: #93370d; }
+.legend i { font-style: normal; padding: 1px 6px; border-radius: 3px; margin-left: 8px; }
+
+.grid-wrap { overflow: auto; max-height: 70vh; background: #fff; border: 1px solid #d3dae3; }
+table.grid { border-collapse: separate; border-spacing: 0; }
+table.grid th, table.grid td { border-right: 1px solid #e4e9f0; border-bottom: 1px solid #e4e9f0; padding: 3px 4px; text-align: center; min-width: 30px; white-space: nowrap; }
+table.grid thead th { position: sticky; top: 0; background: #eef2f7; z-index: 2; font-weight: 600; }
+table.grid thead th small { display: block; font-weight: 400; color: #52606d; }
+table.grid th.holiday { background: #fde8c8; }
+table.grid td.name, table.grid th.name { position: sticky; left: 0; text-align: left; background: #fff; min-width: 210px; z-index: 1; }
+table.grid thead th.name { z-index: 3; background: #eef2f7; }
+td.name small { display: block; color: #52606d; font-size: 11px; max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+td.cell { cursor: pointer; }
+.c-W { background: #d1fadf; }
+.c-WO { background: #cfe3ff; }
+.c-PH { background: #fde8c8; }
+.c-L { background: #fcd5d1; }
+.c-CO { background: #e5d4fb; }
+.c-ok { background: #d1fadf; }
+.c-bad { background: #fca5a5; font-weight: 700; }
+.c-closed { background: #eceff3; color: #9aa5b1; }
+.cov-title { margin-top: 18px; }
+.summary span { display: inline-block; margin-right: 14px; }
+
+.issue { background: #fff; border: 1px solid #d3dae3; border-left: 5px solid #b42318; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; }
+.issue.warning { border-left-color: #dc9b0b; }
+.issue .fix { margin-top: 6px; }
+.issue .fix button { margin: 2px 6px 2px 0; }
+
+table.edit { border-collapse: collapse; background: #fff; }
+table.edit th, table.edit td { border: 1px solid #d3dae3; padding: 4px 6px; text-align: left; }
+table.edit th { background: #eef2f7; }
+table.edit input[type=number] { width: 70px; }
+table.edit tr.new td { background: #f0f7ff; }
+.hint { color: #52606d; margin: 4px 0 10px; }
+
+#menu { position: fixed; background: #fff; border: 1px solid #9aa5b1; border-radius: 6px; padding: 6px; display: flex; gap: 4px; box-shadow: 0 4px 14px rgba(0,0,0,.2); z-index: 10; }
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1f2933; color: #fff; padding: 10px 16px; border-radius: 6px; max-width: 80vw; z-index: 20; }
+#toast.error { background: #b42318; }
+
+/* display:flex above would otherwise override the hidden attribute */
+[hidden] { display: none !important; }
+
+td.cell.locked { outline: 2px solid #1f3a5f; outline-offset: -2px; }
+.explain { margin-top: 6px; padding: 6px 8px; background: #f0f7ff; border-radius: 4px; }
+.explain small { color: #52606d; }
+.note { padding: 6px 10px; border-bottom: 1px solid #e4e9f0; background: #fff; }
+.note small { color: #52606d; display: block; }
