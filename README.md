@@ -1,9 +1,21 @@
 # Smart Roster Manager
 
-A web tool that helps an operations manager plan a monthly roster for many employees across brands, processes and pods. It builds the roster, finds coverage gaps, helps fix them, and runs the review and approval steps.
+A web application that helps an operations manager plan a monthly roster for many employees across brands, processes and pods. It generates the roster, detects coverage gaps, suggests fixes, and supports review and approval before publishing.
 
-- Backend: Python, Flask, SQLite
-- Frontend: plain HTML, CSS and JavaScript (no build step)
+Built as a solution to the Datastraw AI Internship Assessment (problem statement: `AI_Internship Assessment.pdf`).
+
+## Tech stack
+
+| Layer | Choice | Notes |
+| --- | --- | --- |
+| Backend | Python 3.11+, Flask | REST API and static file serving |
+| Database | SQLite (standard library) | Single file, no server to manage |
+| Frontend | HTML, CSS, JavaScript | No framework, no build step |
+| AI (optional) | Any OpenAI-compatible API | OpenRouter by default; rule-based fallback |
+| Python tooling | [uv](https://docs.astral.sh/uv/) | Virtual environment and package install |
+| Frontend tests | Node.js 22, npm, jsdom | Used for tests only; not needed to run the app |
+| CI | GitHub Actions | Separate backend and frontend workflows |
+| Hosting | Render | Single web service via `gunicorn` |
 
 ## What it does
 
@@ -34,7 +46,7 @@ A web tool that helps an operations manager plan a monthly roster for many emplo
 
 ## Run it on your machine
 
-You need Python 3.11 or newer. This project uses [uv](https://docs.astral.sh/uv/).
+**Requirements:** Python 3.11 or newer and [uv](https://docs.astral.sh/uv/) (plain `python -m venv` and `pip` also work). Node.js 22 is needed only to run the frontend tests.
 
 ```bash
 uv venv .venv
@@ -119,7 +131,19 @@ GitHub Actions runs them in two separate workflows:
 
 ## Deploy
 
-The `Procfile` runs `gunicorn app:app`. On Render, Railway or similar: connect the repo, build command `pip install -r requirements.txt`, start command `gunicorn app:app`. Set `LLM_API_KEY` there if you want AI explanations. SQLite is stored in a file. On free hosts that file may reset on restart, which just reloads the sample data.
+The app deploys as a single web service, because Flask serves both the API and the web page. The `Procfile` runs `gunicorn app:app`.
+
+**Render**
+
+1. Create a new **Web Service** and connect this repository.
+2. Runtime: Python 3. Branch: `main`.
+3. Build command: `pip install -r requirements.txt`
+4. Start command: `gunicorn app:app`
+5. Optional: add `LLM_API_KEY` (and `LLM_BASE_URL`, `LLM_MODEL`) under Environment to enable AI explanations. Never commit `.env`.
+
+Every push to `main` redeploys automatically.
+
+**Free-tier limits:** the service sleeps after about 15 minutes without traffic, so the first request is slow. The SQLite file is reset on restart, which reloads the sample data. Use PostgreSQL or a persistent disk for real data.
 
 ## Sample data
 
