@@ -1,0 +1,12 @@
+{
+  "name": "roster-frontend-tests",
+  "private": true,
+  "description": "Only used to test the plain JavaScript page in static/. The app itself needs no npm.",
+  "scripts": {
+    "check": "node --check static/app.js",
+    "test": "node --test \"frontend-tests/*.test.js\""
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
+  }
+}
