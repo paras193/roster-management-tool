@@ -1,0 +1,33 @@
+name: Frontend tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "static/**"
+      - "frontend-tests/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/frontend.yml"
+  pull_request:
+    paths:
+      - "static/**"
+      - "frontend-tests/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/frontend.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Check JavaScript syntax
+        run: npm run check
+      - name: Run page tests (jsdom)
+        run: npm test

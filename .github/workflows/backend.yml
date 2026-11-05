@@ -1,0 +1,34 @@
+name: Backend tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app.py"
+      - "backend/**"
+      - "requirements.txt"
+      - ".github/workflows/backend.yml"
+  pull_request:
+    paths:
+      - "app.py"
+      - "backend/**"
+      - "requirements.txt"
+      - ".github/workflows/backend.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Check that every Python file compiles
+        run: python -m compileall -q app.py backend
+      - name: Run backend tests
+        run: python -m unittest discover -s backend/tests -t . -v
